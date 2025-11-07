@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fibonacci Search — Interactive Tutorial</title>
+  <meta name="description" content="Learn Fibonacci Search: Theory, images, videos, algorithm, interactive demo, and practical usage.">
+ <link rel="stylesheet" href="color.css" />
+</head>
+<body>
+
+<header>
+  <div class="container brand">
+    <span class="logo">Fibonacci Search</span>
+    <nav aria-label="Site navigation">
+      <a href="#theory">Theory</a>
+      <a href="#visuals">Images</a>
+      <a href="#video">Video</a>
+      <a href="#algorithm">Algorithm</a>
+      <a href="#demo">Demo</a>
+      <a href="#explanation">Explanation</a>
+      <a href="#apps">Usage</a>
+      <a href="#summary">Summary</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <aside class="sidebar" aria-label="On this page">
+    <strong>Contents</strong>
+    <ul class="toc">
+      <li><a href="#theory">Theory</a></li>
+      <li><a href="#visuals">Images</a></li>
+      <li><a href="#video">Video Lectures</a></li>
+      <li><a href="#algorithm">Algorithm</a></li>
+      <li><a href="#demo">Interactive Demo</a></li>
+      <li><a href="#explanation">Step-by-Step Explanation</a></li>
+      <li><a href="#apps">Real-Life Usage</a></li>
+      <li><a href="#summary">Summary</a></li>
+    </ul>
+    <div class="sidebar-tip">
+      Generate arrays, enter keys, and see how Fibonacci Search works!
+    </div>
+  </aside>
+
+  <article>
+    <h1>Fibonacci Search — Interactive Tutorial</h1>
+    <p class="lead">Master Fibonacci Search with detailed theory, multiple images, video lectures, pseudocode, step-by-step demo, and practical applications.</p>
+
+    <!-- Theory Section -->
+    <section id="theory" class="card">
+      <h2>Theory</h2>
+      <p><strong>Fibonacci Search</strong> is an efficient search algorithm based on the Fibonacci sequence. It is similar to binary search but divides the array into parts using Fibonacci numbers, making it advantageous in scenarios where division is costly.</p>
+      <p>Steps:</p>
+      <ul>
+        <li>Uses Fibonacci numbers to split a sorted array.</li>
+        <li>Efficient for sorted datasets and hardware where addition is faster than division.</li>
+        <li>Runs in <code>O(log n)</code> time.</li>
+      </ul>
+      <h3>Advantages</h3>
+      <ul>
+        <li>Efficient for sorted arrays.</li>
+        <li>Avoids division, useful in low-level hardware.</li>
+        <li>Educational for understanding alternative search strategies.</li>
+      </ul>
+      <h3>Disadvantages</h3>
+      <ul>
+        <li>Requires a sorted array.</li>
+        <li>More complex than binary search for general use.</li>
+        <li>Less commonly used in modern applications.</li>
+      </ul>
+    </section>
+
+    <!-- Images -->
+    <section id="visuals" class="card">
+      <h2>Images & Diagrams</h2>
+      <p>Below is the Fibonacci Search array probe example:</p>
+      <img src="images/fibonacci-array.png" alt="Fibonacci Search diagram" class="diagram">
+      <p>Illustrating the Fibonacci offset probe and index selection process.</p>
+      <img src="images/fibonacci-sequence.png" alt="Fibonacci sequence image" class="diagram">
+    </section>
+
+    <!-- Videos -->
+    <section id="video" class="card">
+      <h2>Video Lectures</h2>
+      <iframe width="420" height="236" src="https://www.youtube.com/embed/q_AVjuzBxoc" title="Fibonacci Search Lecture 1" frameborder="0" allowfullscreen></iframe>
+      <iframe width="420" height="236" src="https://www.youtube.com/embed/5tknm6N1t70" title="Fibonacci Search Lecture 2" frameborder="0" allowfullscreen></iframe>
+    </section>
+
+    <!-- Algorithm -->
+    <section id="algorithm" class="card">
+      <h2>Algorithm & Pseudocode</h2>
+      <pre><code>
+// Fibonacci Search Algorithm
+function fibonacciSearch(arr, key):
+    n = length(arr)
+    fibMMm2 = 0
+    fibMMm1 = 1
+    fibM = fibMMm2 + fibMMm1
+    while fibM < n:
+        fibMMm2 = fibMMm1
+        fibMMm1 = fibM
+        fibM = fibMMm2 + fibMMm1
+    offset = -1
+    while fibM > 1:
+        i = min(offset + fibMMm2, n-1)
+        if arr[i] < key:
+            fibM = fibMMm1
+            fibMMm1 = fibMMm2
+            fibMMm2 = fibM - fibMMm1
+            offset = i
+        else if arr[i] > key:
+            fibM = fibMMm2
+            fibMMm1 = fibMMm1 - fibMMm2
+            fibMMm2 = fibM - fibMMm1
+        else:
+            return i
+    if fibMMm1 and arr[offset+1] == key:
+        return offset+1
+    return -1
+      </code></pre>
+    </section>
+
+    <!-- Interactive Demo -->
+    <section id="demo" class="card">
+      <h2>Interactive Demo</h2>
+      <div class="controls">
+        <label>Array Size: <input id="arrSize" type="number" value="11" min="3" max="50"></label>
+        <button id="genBtn" class="btn">Generate & Sort</button>
+        <label>Search Key: <input id="searchKey" type="number"></label>
+        <button id="startBtn" class="btn">Start</button>
+      </div>
+      <div id="arrayViz" class="array-row"></div>
+      <div id="logArea">
+        <h4>Step Log</h4>
+        <table>
+          <thead><tr><th>Step</th><th>Action</th><th>Index</th><th>Comment</th></tr></thead>
+          <tbody id="log"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Explanation -->
+    <section id="explanation" class="card">
+      <h2>Step-by-Step Explanation</h2>
+      <p>The Fibonacci Search calculates the probe index using Fibonacci numbers and compares the value at that index with the search key. Based on the comparison:</p>
+      <ul>
+        <li>If the probe value is less, move the offset to the right and reduce the range.</li>
+        <li>If the probe value is greater, reduce the range on the left.</li>
+        <li>Repeat until the key is found or array is exhausted.</li>
+      </ul>
+    </section>
+
+    <!-- Usage -->
+    <section id="apps" class="card">
+      <h2>Real-Life Usage</h2>
+      <ul>
+        <li>Used in hardware and embedded systems where division is costly.</li>
+        <li>Good educational example for alternative search strategies.</li>
+      </ul>
+    </section>
+
+    <!-- Summary -->
+    <section id="summary" class="card">
+      <h2>Summary</h2>
+      <p>Fibonacci Search is a unique search technique based on the Fibonacci sequence. It is fast for sorted arrays and uses addition/subtraction instead of division. Understanding it provides insight into alternative algorithm design techniques.</p>
+    </section>
+
+    <footer>
+      Built for learning with Fibonacci-inspired design! Interactive demo and detailed examples included.
+    </footer>
+  </article>
+</main>
+
+<script src="javascript.js"></script>
+</body>
+</html>
